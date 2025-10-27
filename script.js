@@ -184,6 +184,11 @@ let currentTab = 'calculator';
 let userCoords = null;
 let userAreaName = 'Your Location';
 
+// Add these constants at the top of your script.js
+const COUNTER_API_KEY = 'ut_X78QISEdukj2FE0LpFctTHfCJvwrziYIXgQt1MU8';
+const COUNTER_NAMESPACE = 'ashok';
+const COUNTER_KEY = 'ecomitra-visitors';
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
     loadHistoryFromStorage();
@@ -214,6 +219,9 @@ document.addEventListener('DOMContentLoaded', function() {
     updateHistoryDisplay();
 
     getUserLocationAndUpdateLiveData();
+
+    // Update visitor count
+    updateVisitorCount();
 });
 
 // function getUserLocationAndUpdateLiveData() {
@@ -1776,4 +1784,69 @@ document.addEventListener('DOMContentLoaded', function() {
     if (greenSource) {
         greenSource.addEventListener('change', toggleGreenEnergyInputs);
     }
+});
+
+// Add this function to handle visitor counting
+async function updateVisitorCount() {
+    const visitorCounter = document.getElementById('visitor-counter');
+    
+    // Check if this is a new visit
+    const lastVisit = localStorage.getItem('lastVisit');
+    const today = new Date().toDateString();
+    
+    if (lastVisit !== today) {
+        try {
+            // Increment counter
+            const response = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${COUNTER_KEY}/up?authKey=${COUNTER_API_KEY}`);
+            const data = await response.json();
+            
+            // Animate and display the count
+            animateCount(visitorCounter, data.count);
+            
+            // Store visit date
+            localStorage.setItem('lastVisit', today);
+        } catch (error) {
+            console.error('Failed to update visitor count:', error);
+            visitorCounter.textContent = '👥 Welcome!';
+        }
+    } else {
+        // Just get current count without incrementing
+        try {
+            const response = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${COUNTER_KEY}/get?authKey=${COUNTER_API_KEY}`);
+            const data = await response.json();
+            
+            // Display the count without animation for returning visitors
+            visitorCounter.textContent = `👥 ${data.count.toLocaleString()} visitors`;
+        } catch (error) {
+            console.error('Failed to fetch visitor count:', error);
+            visitorCounter.textContent = '👥 Welcome back!';
+        }
+    }
+}
+
+// Add this function for count animation
+function animateCount(element, targetCount) {
+    const duration = 1000; // 1 second animation
+    const steps = 20;
+    const stepDuration = duration / steps;
+    let currentCount = 0;
+    
+    const increment = Math.ceil(targetCount / steps);
+    
+    const counter = setInterval(() => {
+        currentCount = Math.min(currentCount + increment, targetCount);
+        element.textContent = `👥 ${currentCount.toLocaleString()} visitors`;
+        element.style.animation = 'countUp 0.3s ease-out';
+        
+        if (currentCount >= targetCount) {
+            clearInterval(counter);
+        }
+    }, stepDuration);
+}
+
+// Add this to your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', function() {
+    // ...existing code...
+    updateVisitorCount();
+    // ...existing code...
 });
