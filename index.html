@@ -9,32 +9,45 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="exhibition-badge">🏆 CBSE Science Exhibition 2025</div>
             <h1>🌍 EcoMitra Pro - Advanced Carbon Intelligence Platform</h1>
-            <p>AI-Powered Carbon Footprint Analysis & Climate Action Platform for Sustainable India 🇮🇳</p>
-            <div class="live-data-banner">
-                <span id="live-aqi">🌬️ Live AQI: Loading...</span>
+            <p>AI-Powered Carbon Footprint Analysis & Climate Action Platform for Sustainable India</p>
+            <!-- <div class="live-data-banner">
                 <span id="live-co2">🌡️ Atmospheric CO₂: 418 ppm</span>
-                <span id="live-time">🕒 Real-time Data</span>
-                <!-- Add this inside .live-data-banner -->
-<button id="detect-location-btn" style="margin-left:10px;">📍 Detect My Location</button>
-<span id="visitor-counter" class="visitor-badge">
-    👥 Loading visitors...
-</span>
-            </div>
+                <span id="visitor-counter" class="visitor-badge hide-mobile">
+                    👥 Loading visitors...
+                </span>
+            </div> -->
         </div>
 
         <div class="nav-tabs">
-            <button class="nav-tab active" onclick="switchTab('calculator')">🧮 Calculator</button>
-            <button class="nav-tab" onclick="switchTab('history')">📈 History</button>
-            <button class="nav-tab" onclick="switchTab('impact')">📊 Live Impact</button>
-            <button class="nav-tab" onclick="switchTab('challenges')">🏆 Challenges</button>
-            <button class="nav-tab" onclick="switchTab('community')">👥 Community</button>
-            <button class="nav-tab" onclick="switchTab('methodology')">🔬 Methodology</button>
+            <div class="desktop-tabs">
+                <button class="nav-tab active" onclick="switchTab('calculator')">🧮 Calculator</button>
+                <button class="nav-tab" onclick="switchTab('history')">📈 History</button>
+                <button class="nav-tab" onclick="switchTab('impact')">📊 Live Impact</button>
+                <button class="nav-tab" onclick="switchTab('challenges')">🏆 Challenges</button>
+                <button class="nav-tab" onclick="switchTab('community')">👥 Community</button>
+                <button class="nav-tab" onclick="switchTab('methodology')">🔬 Methodology</button>
+            </div>
+            <div class="mobile-nav">
+                <button class="active mobile-nav-btn" onclick="switchTab('calculator')">🧮</button>
+                <div class="mobile-menu-icon" onclick="toggleMobileMenu()">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <button onclick="switchTab('calculator'); toggleMobileMenu()">🧮 Calculator</button>
+                    <button onclick="switchTab('history'); toggleMobileMenu()">📈 History</button>
+                    <button onclick="switchTab('impact'); toggleMobileMenu()">📊 Live Impact</button>
+                    <button onclick="switchTab('challenges'); toggleMobileMenu()">🏆 Challenges</button>
+                    <button onclick="switchTab('community'); toggleMobileMenu()">👥 Community</button>
+                    <button onclick="switchTab('methodology'); toggleMobileMenu()">🔬 Methodology</button>
+                </div>
+            </div>
         </div>
 
         <!-- Calculator Tab -->
@@ -508,12 +521,7 @@
                     <div class="live-dashboard">
                         <div class="dashboard-grid">
                             <div class="dashboard-item">
-                                <h4>🌬️ Live Air Quality</h4>
-                                <div class="dashboard-value" id="live-aqi-value">Loading...</div>
-                                <div class="dashboard-label" id="aqi-level">Real-time Data</div>
-                            </div>
-                            <div class="dashboard-item">
-                                <h4>🌡️ Atmospheric CO₂</h4>
+                                <h4>️ Atmospheric CO₂</h4>
                                 <div class="dashboard-value">418 ppm</div>
                                 <div class="dashboard-label">Mauna Loa Observatory</div>
                             </div>
