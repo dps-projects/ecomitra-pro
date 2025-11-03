@@ -2393,3 +2393,129 @@ body {
     padding-bottom: 0 !important;
   }
 }
+
+/* Improved nav-tabs styling for desktop */
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.desktop-tabs {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 10px;
+}
+
+.nav-tab {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    background: none;
+    color: #666;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.nav-tab:hover {
+    background: rgba(50, 205, 50, 0.1);
+    color: #32CD32;
+}
+
+.nav-tab.active {
+    background: #32CD32;
+    color: white;
+}
+
+/* Add media query for mobile devices */
+@media screen and (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+
+    .desktop-tabs {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #32CD32;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-nav-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+
+    .mobile-menu-icon {
+        color: white;
+        font-size: 1.5rem;
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        bottom: 60px;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    .mobile-menu.active {
+        display: block;
+    }
+
+    .mobile-menu button {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        background: none;
+        text-align: left;
+        font-size: 1rem;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+    }
+
+    .mobile-menu button:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-menu button:active {
+        background-color: #f0f0f0;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .mobile-nav {
+        display: none;
+    }
+}
