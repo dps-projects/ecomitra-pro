@@ -1,3 +1,9 @@
+// Mobile menu toggle function
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenu.classList.toggle('active');
+}
+
 // Advanced emission factors database with seasonal variations
 const emissionFactors = {
     electricity: {
